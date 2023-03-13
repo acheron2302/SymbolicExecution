@@ -32,6 +32,7 @@ link-libraries = [
     "Zydis",
     "LIEF::LIEF",
     "fmt::fmt-header-only",
+    "argparse",
 ]
 
 compile-features = ["cxx_std_17"]

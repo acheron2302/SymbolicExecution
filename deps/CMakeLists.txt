@@ -57,3 +57,13 @@ endif()
 add_subdirectory(googletest)
 set(CMAKE_FOLDER ${CMKR_CMAKE_FOLDER})
 
+# Subdirectory: argparse
+set(CMKR_CMAKE_FOLDER ${CMAKE_FOLDER})
+if(CMAKE_FOLDER)
+	set(CMAKE_FOLDER "${CMAKE_FOLDER}/argparse")
+else()
+	set(CMAKE_FOLDER argparse)
+endif()
+add_subdirectory(argparse)
+set(CMAKE_FOLDER ${CMKR_CMAKE_FOLDER})
+

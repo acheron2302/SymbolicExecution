@@ -27,3 +27,5 @@ LIEF_TESTS = false
 [subdir.fmt]
 
 [subdir.googletest]
+
+[subdir.argparse]

@@ -67,6 +67,7 @@ target_link_libraries(SymbolicExecution PRIVATE
 	Zydis
 	LIEF::LIEF
 	fmt::fmt-header-only
+	argparse
 )
 
 set_target_properties(SymbolicExecution PROPERTIES

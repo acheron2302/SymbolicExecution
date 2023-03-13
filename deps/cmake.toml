@@ -1,0 +1,29 @@
+# Reference: https://build-cpp.github.io/cmkr/cmake-toml
+
+# TODO: define a target for each of your executables/libraries like this:
+#[target.myexecutable]
+#type = "executable" # static, shared
+#sources = ["src/deps/*.cpp", "include/deps/*.hpp"]
+#include-directories = ["include"]
+#compile-features = ["cxx_std_11"]
+#link-libraries = ["target-or-library"]
+
+[options]
+ZYDIS_BUILD_SHARED_LIB = false
+ZYDIS_BUILD_EXAMPLES = false
+ZYDIS_BUILD_TOOLS = false
+ZYDIS_FUZZ_AFL_FAST = false
+ZYDIS_LIBFUZZER = false
+
+LIEF_DOC = false
+LIEF_PYTHON_API = false
+LIEF_EXAMPLES = false
+LIEF_TESTS = false
+
+[subdir.zydis]
+
+[subdir.LIEF]
+
+[subdir.fmt]
+
+[subdir.googletest]

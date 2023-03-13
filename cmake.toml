@@ -1,0 +1,71 @@
+# Reference: https://build-cpp.github.io/cmkr/cmake-toml
+[project]
+name = "SymbolicExecution"
+
+# TODO: define a target for each of your executables/libraries like this:
+#[target.myexecutable]
+#type = "executable" # static, shared
+#sources = ["src/SymbolicExecution/*.cpp", "include/SymbolicExecution/*.hpp"]
+#include-directories = ["include"]
+#compile-features = ["cxx_std_11"]
+#link-libraries = ["target-or-library"]
+
+[settings]
+gtest_force_shared_crt = false
+
+[subdir.deps]
+
+[target.SymbolicExecution.properties]
+CXX_STANDARD_REQUIRED = true
+
+[target.SymbolicExecution]
+type = "executable"
+sources = [
+	"src/**.cpp",
+]
+
+include-directories = [
+    "include",
+]
+
+link-libraries = [
+    "Zydis",
+    "LIEF::LIEF",
+    "fmt::fmt-header-only",
+]
+
+compile-features = ["cxx_std_17"]
+
+[target.Test]
+type = "executable"
+sources = [
+    "test/*.cpp",
+    "test/*.hpp",
+    "src/ReadFileUtil.cpp",
+    "src/TraversalDisassemble.cpp",
+    "src/block/*.cpp"
+]
+
+include-directories = [
+    "include",
+]
+
+link-libraries = [
+    "Zydis",
+    "LIEF::LIEF",
+    "fmt::fmt-header-only",
+    "GTest::gtest",
+    "GTest::gtest_main",
+    "GTest::gmock",
+    "GTest::gmock_main"
+]
+
+compile-definitions = [
+    "NOMINMAX"
+]
+compile-features = ["cxx_std_17"]
+
+[[test]]
+name = "Test_AVL"
+command = "Test"
+working-directory = "src"

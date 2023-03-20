@@ -10,7 +10,7 @@ name = "SymbolicExecution"
 #compile-features = ["cxx_std_11"]
 #link-libraries = ["target-or-library"]
 
-[settings]
+[options]
 gtest_force_shared_crt = false
 
 [subdir.deps]

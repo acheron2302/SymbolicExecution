@@ -6,6 +6,8 @@
 #include <LIEF/LIEF.hpp>
 #include <fstream>
 #include <memory>
+#include <optional>
+#include <fmt/format.h>
 
 namespace file {
 enum arch { ARCH32BIT, ARCH64BIT };
@@ -29,7 +31,13 @@ struct File {
         size = end - beg;
         ifs.seekg(std::fstream::beg);
 
-        pe = std::move(LIEF::PE::Parser::parse(name));
+        try {
+            this->pe = std::move(LIEF::PE::Parser::parse(name));
+            return;
+        } catch (std::exception &e) {
+            this->pe = nullptr;
+            return;
+        }
     };
 
     size_t Size() {
@@ -38,6 +46,13 @@ struct File {
 
     ~File() {
         ifs.close();
+    }
+
+    const bool IsNullPtr() {
+        if (this->pe == nullptr) {
+            return true;
+        }
+        return false;
     }
 
     uint64_t GetEntryPointReal() {
@@ -66,7 +81,7 @@ struct File {
     }
 };
 
-File *NewFile(std::string name);
+std::optional<File*> NewFile(std::string name);
 
 } // namespace file
 

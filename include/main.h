@@ -4,6 +4,7 @@
 #pragma once
 
 #include "TraversalDisassemble.h"
+#include "ReadFileUtil.h"
 #include <LIEF/LIEF.hpp>
 #include <Zydis/Zydis.h>
 #include <fmt/format.h>

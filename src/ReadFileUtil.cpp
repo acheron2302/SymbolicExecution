@@ -1,5 +1,9 @@
 #include "ReadFileUtil.h"
 
-file::File *file::NewFile(std::string name) {
-    return new file::File(name);
+std::optional<file::File*> file::NewFile(std::string name) {
+    auto pe_file = new file::File(name);
+    if (pe_file->IsNullPtr()) {
+        return std::nullopt;
+    }
+    return pe_file;
 }

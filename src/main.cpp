@@ -12,7 +12,9 @@
 
 int main(int argc, char *argv[]) {
     argparse::ArgumentParser program("Nys");
-    program.add_argument("--file").required().help("Input a file to analyse");
+    program.add_argument("--file")
+        .required()
+        .help("Input a file to analyse");
 
     try {
         program.parse_args(argc, argv);
@@ -24,5 +26,10 @@ int main(int argc, char *argv[]) {
 
     std::string file_name = program.get<std::string>("--file");
     fmt::print("Hello World: {}\n", file_name);
+    auto result = file::NewFile(file_name);
+    if (!result.has_value()) {
+        fmt::print("Cannot find pe file: {}", file_name);
+        return -1;
+    }
     return 0;
 }

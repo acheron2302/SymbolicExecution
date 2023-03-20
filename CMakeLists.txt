@@ -24,8 +24,8 @@ if(CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
 	configure_file(cmake.toml cmake.toml COPYONLY)
 endif()
 
-# Settings
-set(gtest_force_shared_crt OFF)
+# Options
+option(gtest_force_shared_crt "" OFF)
 
 project(SymbolicExecution)
 

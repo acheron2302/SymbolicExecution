@@ -15,6 +15,7 @@ gtest_force_shared_crt = false
 
 [subdir.deps]
 
+
 [target.SymbolicExecution.properties]
 CXX_STANDARD_REQUIRED = true
 
@@ -23,6 +24,8 @@ type = "executable"
 sources = [
 	"src/**.cpp",
 ]
+
+link-directories = ["deps/pyvex/build/lib/pyvex/lib"]
 
 include-directories = [
     "include",
@@ -33,6 +36,7 @@ link-libraries = [
     "LIEF::LIEF",
     "fmt::fmt-header-only",
     "argparse",
+    "pyvex",
 ]
 
 compile-features = ["cxx_std_17"]
@@ -58,7 +62,8 @@ link-libraries = [
     "GTest::gtest",
     "GTest::gtest_main",
     "GTest::gmock",
-    "GTest::gmock_main"
+    "GTest::gmock_main",
+    "pyvex", 
 ]
 
 compile-definitions = [

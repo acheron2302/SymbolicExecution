@@ -67,3 +67,13 @@ endif()
 add_subdirectory(argparse)
 set(CMAKE_FOLDER ${CMKR_CMAKE_FOLDER})
 
+# Subdirectory: pyvex
+set(CMKR_CMAKE_FOLDER ${CMAKE_FOLDER})
+if(CMAKE_FOLDER)
+	set(CMAKE_FOLDER "${CMAKE_FOLDER}/pyvex")
+else()
+	set(CMAKE_FOLDER pyvex)
+endif()
+add_subdirectory(pyvex)
+set(CMAKE_FOLDER ${CMKR_CMAKE_FOLDER})
+

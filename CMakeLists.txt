@@ -63,11 +63,16 @@ target_include_directories(SymbolicExecution PRIVATE
 	include
 )
 
+target_link_directories(SymbolicExecution PRIVATE
+	"deps/pyvex/build/lib/pyvex/lib"
+)
+
 target_link_libraries(SymbolicExecution PRIVATE
 	Zydis
 	LIEF::LIEF
 	fmt::fmt-header-only
 	argparse
+	pyvex
 )
 
 set_target_properties(SymbolicExecution PROPERTIES
@@ -86,6 +91,7 @@ set(Test_SOURCES
 	"test/BlockTest.cpp"
 	"test/FileUtilTest.cpp"
 	"test/FunctionTest.cpp"
+	"test/LiftingTest.cpp"
 	"test/RecursiveDisassembleTest.cpp"
 	"src/ReadFileUtil.cpp"
 	"src/TraversalDisassemble.cpp"
@@ -120,6 +126,7 @@ target_link_libraries(Test PRIVATE
 	GTest::gtest_main
 	GTest::gmock
 	GTest::gmock_main
+	pyvex
 )
 
 get_directory_property(CMKR_VS_STARTUP_PROJECT DIRECTORY ${PROJECT_SOURCE_DIR} DEFINITION VS_STARTUP_PROJECT)

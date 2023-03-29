@@ -29,3 +29,5 @@ LIEF_TESTS = false
 [subdir.googletest]
 
 [subdir.argparse]
+
+[subdir.pyvex]

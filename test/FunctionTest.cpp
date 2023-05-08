@@ -62,15 +62,21 @@ TEST_F(TestFunction, ConstructionAndInsert) {
     vecFunc.push_back(testFunc1);
     vecFunc.push_back(testFunc2);
     vecFunc.push_back(testFunc3);
+    EXPECT_THROW(vecFunc[0x4], std::out_of_range);
+    EXPECT_NO_THROW(vecFunc[0x1]);
+    EXPECT_NO_THROW(vecFunc[0x2]);
+    EXPECT_NO_THROW(vecFunc[0x3]);
     ASSERT_EQ(vecFunc[0x1].StartAddress(), 0x1);
     ASSERT_EQ(vecFunc[0x2].StartAddress(), 0x2);
 
     function::FunctionRead &funcRead1 = *testFunc.get();
-    uint64_t counter = 0;
+    uint64_t counter = 1;
     for (auto eachBlock : funcRead1) {
         auto result = eachBlock->GetStartAddress();
         EXPECT_TRUE(result == 0x1 || result == 0x2 || result == 0x3 || result == 0x4 || result == 0x5 || result == 0x6 || result == 0x7);
-        ASSERT_THAT(counter, ::testing::Lt(7));
+        ASSERT_EQ(counter, result);
+        ASSERT_THAT(counter, ::testing::Lt(8));
+        counter++;
     }
 }
 

@@ -19,10 +19,8 @@ class RecursiveDisassembleTest : public ::testing::Test {
         testDis = nullptr;
     }
 
-    virtual void SetUp() {
-    }
-    virtual void TearDown() {
-    }
+    virtual void SetUp() {}
+    virtual void TearDown() {}
 };
 
 disas::RecursiveDisassemble *RecursiveDisassembleTest::testDis = nullptr;
@@ -30,12 +28,13 @@ disas::RecursiveDisassemble *RecursiveDisassembleTest::testDis = nullptr;
 TEST_F(RecursiveDisassembleTest, ConstructionTest) {
     testDis->DisassembleFunction();
     auto funcs = testDis->GetVecFunc();
-    ASSERT_EQ(funcs.size(), 3);
+    ASSERT_EQ(funcs.size(), 3);;
     ASSERT_EQ(funcs[0x10010465].StartAddress(), 0x10010465);
     ASSERT_EQ(funcs[0x10010465].Size(), 4);
     ASSERT_EQ(funcs[0x10018bc0].StartAddress(), 0x10018bc0);
     ASSERT_EQ(funcs[0x10018bc0].Size(), 1);
-    auto block_value = funcs[0x10010465].GetBlockAtStartAddr(0x10010477);
+    auto block_value =
+        funcs[0x10010465].GetBlockAtStartAddr(0x10010477);
     if (!block_value.has_value()) {
         FAIL() << "Fail to get block at 0x10010465";
     }
@@ -74,7 +73,8 @@ TEST_F(RecursiveDisassembleTest, LeakTest) {
         int diffResult = _CrtMemDifference(&stateDiff1, &memState, &stateNow);
 
         if (!diffResult) {
-            FAIL() << fmt::format("Expect create {} byte(s)", stateDiff1.lSizes[1]);
+            FAIL() << fmt::format("Expect create {} byte(s)",
+                                  stateDiff1.lSizes[1]);
         }
     }
 
@@ -82,7 +82,8 @@ TEST_F(RecursiveDisassembleTest, LeakTest) {
     _CrtMemCheckpoint(&stateNow2);
     int diffResult2 = _CrtMemDifference(&stateDiff2, &memState, &stateNow2);
     if (diffResult2) {
-        FAIL() << fmt::format("Memory leak of {} byte(s) detected", stateDiff2.lSizes[1]);
+        FAIL() << fmt::format("Memory leak of {} byte(s) detected",
+                              stateDiff2.lSizes[1]);
     }
 #else
 #endif

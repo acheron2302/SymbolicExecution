@@ -15,7 +15,6 @@ gtest_force_shared_crt = false
 
 [subdir.deps]
 
-
 [target.SymbolicExecution.properties]
 CXX_STANDARD_REQUIRED = true
 
@@ -40,6 +39,7 @@ link-libraries = [
 ]
 
 compile-features = ["cxx_std_17"]
+private-compile-options = ["$<$<CXX_COMPILER_ID:MSVC>:/WX>", "$<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-Wall -Wextra -Wpedantic -Werror>"]
 
 [target.Test]
 type = "executable"
@@ -70,6 +70,7 @@ compile-definitions = [
     "NOMINMAX"
 ]
 compile-features = ["cxx_std_17"]
+private-compile-options = ["$<$<CXX_COMPILER_ID:MSVC>:/WX>", "$<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-Wall -Wextra -Wpedantic -Werror>"]
 
 [[test]]
 name = "Test_AVL"

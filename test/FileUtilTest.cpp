@@ -1,6 +1,6 @@
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
-
+#include <string>
 #include "ReadFileUtil.h"
 
 class FileUtilTest : public ::testing::Test {
@@ -35,7 +35,7 @@ TEST_F(FileUtilTest, Construction) {
 }
 
 TEST_F(FileUtilTest, GetContent) {
-    using std::operator""s;
+    using namespace std::string_literals;
     ASSERT_EQ(file->GetEntryPointReal(), 5216565);
     ASSERT_EQ(file->GetEntryPointVA(), 0x10000000 + 0x500735);
 

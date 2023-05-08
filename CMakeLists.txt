@@ -41,12 +41,15 @@ set(CMAKE_FOLDER ${CMKR_CMAKE_FOLDER})
 
 # Target: SymbolicExecution
 set(SymbolicExecution_SOURCES
+	"src/Analysis/LiftWrapper.cpp"
+	"src/Analysis/ReachingDefinitionAnalysis.cpp"
 	"src/Block/Block.cpp"
 	"src/Block/Dominator.cpp"
 	"src/Block/Function.cpp"
 	"src/ReadFileUtil.cpp"
 	"src/TraversalDisassemble.cpp"
 	"src/main.cpp"
+	"src/translation/SubVexIL.cpp"
 	cmake.toml
 )
 
@@ -57,6 +60,11 @@ source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${SymbolicExecution_SOURCES}
 
 target_compile_features(SymbolicExecution PRIVATE
 	cxx_std_17
+)
+
+target_compile_options(SymbolicExecution PRIVATE
+	"$<$<CXX_COMPILER_ID:MSVC>:/WX>"
+	"$<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-Wall -Wextra -Wpedantic -Werror>"
 )
 
 target_include_directories(SymbolicExecution PRIVATE
@@ -112,6 +120,11 @@ target_compile_definitions(Test PRIVATE
 
 target_compile_features(Test PRIVATE
 	cxx_std_17
+)
+
+target_compile_options(Test PRIVATE
+	"$<$<CXX_COMPILER_ID:MSVC>:/WX>"
+	"$<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-Wall -Wextra -Wpedantic -Werror>"
 )
 
 target_include_directories(Test PRIVATE

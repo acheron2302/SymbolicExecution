@@ -4,10 +4,10 @@
 #pragma once
 
 #include <LIEF/LIEF.hpp>
+#include <fmt/format.h>
 #include <fstream>
 #include <memory>
 #include <optional>
-#include <fmt/format.h>
 
 namespace file {
 enum arch { ARCH32BIT, ARCH64BIT };
@@ -40,13 +40,9 @@ struct File {
         }
     };
 
-    size_t Size() {
-        return size;
-    }
+    const size_t Size() { return size; }
 
-    ~File() {
-        ifs.close();
-    }
+    ~File() { ifs.close(); }
 
     const bool IsNullPtr() {
         if (this->pe == nullptr) {
@@ -55,12 +51,15 @@ struct File {
         return false;
     }
 
-    uint64_t GetEntryPointReal() {
+    const uint64_t GetEntryPointReal() {
         return pe->va_to_offset(pe->entrypoint());
     }
 
-    uint64_t GetEntryPointVA() {
-        return pe->entrypoint();
+    const uint64_t GetEntryPointVA() { return pe->entrypoint(); }
+
+    std::vector<uint8_t> GetPartOfFile(uint64_t _vOffset, uint64_t _size) {
+        return pe->get_content_from_virtual_address(_vOffset, _size,
+                                                    LIEF::Binary::VA_TYPES::VA);
     }
 
     std::unique_ptr<const char[]> GetFullFile() {
@@ -70,7 +69,8 @@ struct File {
     }
 
     std::vector<uint8_t> GetDisassemblePart(uint64_t virtualOffset) {
-        return pe->get_content_from_virtual_address(virtualOffset, 16, LIEF::Binary::VA_TYPES::VA);
+        return pe->get_content_from_virtual_address(virtualOffset, 16,
+                                                    LIEF::Binary::VA_TYPES::VA);
     }
 
     arch GetArch() {
@@ -81,7 +81,7 @@ struct File {
     }
 };
 
-std::optional<File*> NewFile(std::string name);
+std::optional<File *> NewFile(std::string name);
 
 } // namespace file
 

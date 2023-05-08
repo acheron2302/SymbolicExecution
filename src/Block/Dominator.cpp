@@ -7,7 +7,7 @@
 std::optional<std::unordered_map<block::shared_block, uint64_t>> analyse::Dominator::PostOrderEnumerate(function::FunctionRead &_func) {
     std::stack<block::shared_block> stack;
     std::set<uint64_t> doneList;
-    std::unordered_map<block::shared_block, uint64_t> blockNum;
+    std::unordered_map<block::shared_block, uint64_t> map_block_to_id;
 
     uint64_t num = 1;
     auto head = _func.GetBeginBlock();
@@ -18,7 +18,7 @@ std::optional<std::unordered_map<block::shared_block, uint64_t>> analyse::Domina
         block::shared_block block = stack.top();
         if (doneList.find(block->GetStartAddress()) != doneList.end()) {
             stack.pop();
-            blockNum[block] = num;
+            map_block_to_id[block] = num;
             num += 1;
             continue;
         }
@@ -34,7 +34,7 @@ std::optional<std::unordered_map<block::shared_block, uint64_t>> analyse::Domina
         doneList.insert(block->GetStartAddress());
     }
 
-    return blockNum;
+    return map_block_to_id;
 }
 
 block::shared_block analyse::Dominator::Intersect(block::shared_block b1, block::shared_block b2) {

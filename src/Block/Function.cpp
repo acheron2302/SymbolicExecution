@@ -13,13 +13,15 @@ bool Function::AddNewEdge(block::shared_block src, block::shared_block dest) {
     return true;
 }
 
-bool Function::AddNewEdge(block::shared_block src, block::shared_block dest, bool _isTrue) {
+bool Function::AddNewEdge(block::shared_block src, block::shared_block dest,
+                          bool _isTrue) {
     auto edge = src->NewEdge(dest, _isTrue);
     edge->SrcBlock(src);
     return true;
 }
 
-std::optional<block::shared_block> Function::GetBlockAtStartAddr(uint64_t _startAddr) {
+std::optional<block::shared_block>
+Function::GetBlockAtStartAddr(uint64_t _startAddr) {
     if (this->functionBlock.Search(_startAddr) == nullptr) {
         return std::nullopt;
     }
@@ -48,12 +50,12 @@ block::BFSIterator Function::end() {
     return end;
 }
 
-Function &VecFunction::operator[](uint64_t _startAddress) {
-    for (auto eachFunction = this->begin(); eachFunction != this->end(); eachFunction++) {
+Function& VecFunction::operator[](uint64_t _startAddress) {
+    for (auto eachFunction = this->begin(); eachFunction != this->end();
+         eachFunction++) {
         if ((*eachFunction)->StartAddress() == _startAddress) {
             return **eachFunction;
         }
     }
-    Function func = Function(UINT64_MAX);
-    return func;
+    throw std::out_of_range("The Address is out of range");
 }

@@ -45,7 +45,7 @@ class Function : public FunctionRead {
 
 class VecFunction : public std::vector<std::shared_ptr<function::Function>> {
   public:
-    function::Function &operator[](uint64_t _startAddress);
+    function::Function& operator[](uint64_t _startAddress);
 };
 
 typedef std::shared_ptr<Function> shared_function;

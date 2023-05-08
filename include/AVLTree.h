@@ -16,7 +16,7 @@ class AVL {
     class Node {
       private:
         T key;
-        size_t height;
+        int height;
         Node *left;
         Node *right;
         V value;
@@ -55,7 +55,7 @@ class AVL {
             return value;
         }
 
-        size_t Height() {
+        int Height() {
             return height;
         }
 
@@ -430,7 +430,7 @@ class AVL {
         return {currentNode, parentNode};
     }
 
-    int8_t GetBalance(node_ptr _head) {
+    int GetBalance(node_ptr _head) {
         // result
         // > 1 <-> _head.left > _head.right
         // <-1 <-> _head.right > _head.left
@@ -476,7 +476,7 @@ class AVL {
         return {currentNode, {parentNode, direction}};
     }
 
-    int8_t NodeHeight(node_ptr _head) {
+    int NodeHeight(node_ptr _head) {
         if (_head == nullptr)
             return 0;
         return _head->height;

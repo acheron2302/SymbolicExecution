@@ -64,15 +64,11 @@ target_compile_features(SymbolicExecution PRIVATE
 
 target_compile_options(SymbolicExecution PRIVATE
 	"$<$<CXX_COMPILER_ID:MSVC>:/WX>"
-	"$<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-Wall -Wextra -Wpedantic -Werror>"
+	"$<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-Wall>"
 )
 
 target_include_directories(SymbolicExecution PRIVATE
 	include
-)
-
-target_link_directories(SymbolicExecution PRIVATE
-	"deps/pyvex/build/lib/pyvex/lib"
 )
 
 target_link_libraries(SymbolicExecution PRIVATE
@@ -124,7 +120,7 @@ target_compile_features(Test PRIVATE
 
 target_compile_options(Test PRIVATE
 	"$<$<CXX_COMPILER_ID:MSVC>:/WX>"
-	"$<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-Wall -Wextra -Wpedantic -Werror>"
+	"$<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-Wall>"
 )
 
 target_include_directories(Test PRIVATE

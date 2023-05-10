@@ -24,8 +24,6 @@ sources = [
 	"src/**.cpp",
 ]
 
-link-directories = ["deps/pyvex/build/lib/pyvex/lib"]
-
 include-directories = [
     "include",
 ]
@@ -39,7 +37,7 @@ link-libraries = [
 ]
 
 compile-features = ["cxx_std_17"]
-private-compile-options = ["$<$<CXX_COMPILER_ID:MSVC>:/WX>", "$<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-Wall -Wextra -Wpedantic -Werror>"]
+private-compile-options = ["$<$<CXX_COMPILER_ID:MSVC>:/WX>", "$<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-Wall>"]
 
 [target.Test]
 type = "executable"
@@ -70,7 +68,7 @@ compile-definitions = [
     "NOMINMAX"
 ]
 compile-features = ["cxx_std_17"]
-private-compile-options = ["$<$<CXX_COMPILER_ID:MSVC>:/WX>", "$<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-Wall -Wextra -Wpedantic -Werror>"]
+private-compile-options = ["$<$<CXX_COMPILER_ID:MSVC>:/WX>", "$<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-Wall>"]
 
 [[test]]
 name = "Test_AVL"

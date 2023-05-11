@@ -102,6 +102,8 @@ set(Test_SOURCES
 	"src/block/Block.cpp"
 	"src/block/Dominator.cpp"
 	"src/block/Function.cpp"
+	"src/Analysis/LiftWrapper.cpp"
+	"src/Analysis/ReachingDefinitionAnalysis.cpp"
 	cmake.toml
 )
 

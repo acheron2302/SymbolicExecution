@@ -46,7 +46,8 @@ sources = [
     "test/*.hpp",
     "src/ReadFileUtil.cpp",
     "src/TraversalDisassemble.cpp",
-    "src/block/*.cpp"
+    "src/block/*.cpp",
+    "src/Analysis/*.cpp"
 ]
 
 include-directories = [

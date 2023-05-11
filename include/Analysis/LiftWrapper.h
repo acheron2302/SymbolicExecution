@@ -180,7 +180,7 @@ struct ITE {
     std::unique_ptr<WrapIRExpr> iffalse; /* False expression */
 };
 
-typedef std::variant<Binder, Get, vex::GetI, RdTmp, Qop, Triop, Binop, Unop, Load,
+typedef std::variant<Binder, Get, GetI, RdTmp, Qop, Triop, Binop, Unop, Load,
                      Const, CCall, ITE>
     IEXVariant;
 

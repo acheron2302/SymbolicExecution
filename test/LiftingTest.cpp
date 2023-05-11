@@ -115,4 +115,9 @@ TEST(LifterTest, Lifting) {
     ASSERT_EQ(result->stmts_used, 16);
     ASSERT_EQ(result->tyenv->types_used, 7);
     ASSERT_TRUE(std::holds_alternative<vex::Put>(result->stmts[12]->var));
+    ASSERT_FALSE(std::holds_alternative<vex::AbiHint>(result->stmts[12]->var));
+    auto ptr = std::get_if<vex::Put>(&result->stmts[12]->var);
+    ASSERT_NE(ptr, nullptr);
+    ASSERT_EQ(ptr->offset, OFFSET_amd64_RAX + 1); // check if it is ah
+    ASSERT_EQ(result->tyenv->types[3], Ity_I32);
 }
